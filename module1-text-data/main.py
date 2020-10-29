@@ -8,34 +8,131 @@ from collections import Counter
 import spacy
 from spacy.tokenizer import Tokenizer
 
+from collections import Counter
 
-class State(object):
-    def __init__(self):
-        self._test = 100
 
-    @property
-    def test(self):
+class HandleTokens(object):
+    """
+    Created these functions as modules, some important methods used to finish assignment 1.
+    """
+    @staticmethod
+    def tokenize(df_in):
         """
-        Function to report the state _test
-        :return: test
-        """
-        print(self._test)
-        return self._test
-
-    @test.setter
-    def test(self, value):
-        """
-        Inputs value into function to be saved into state _test
-        :param value:
+        Tokenize by inputting a dataframe.
+        :param df_in:
         :return:
         """
-        print(value)
-        self._test = value
+        nlp = spacy.load("en_core_web_lg")
+
+        # Tokenizer
+        tokenizer = Tokenizer(nlp.vocab)
+        tokens = []
+        for doc in tokenizer.pipe(df_in, batch_size=500):
+            doc_tokens = [token.text for token in doc]
+            tokens.append(doc_tokens)
+        return tokens
+
+    @staticmethod
+    def count(docs):
+        """
+        Count words in
+        :param docs:
+        :return:
+        """
+        word_counts = Counter()
+        appears_in = Counter()
+
+        total_docs = len(docs)
+
+        for doc in docs:
+            word_counts.update(doc)
+            appears_in.update(set(doc))
+
+        temp = zip(word_counts.keys(), word_counts.values())
+
+        wc = pd.DataFrame(temp, columns=['word', 'count'])
+
+        wc['rank'] = wc['count'].rank(method='first', ascending=False)
+        total = wc['count'].sum()
+
+        wc['pct_total'] = wc['count'].apply(lambda x: x / total)
+
+        wc = wc.sort_values(by='rank')
+        wc['cul_pct_total'] = wc['pct_total'].cumsum()
+
+        t2 = zip(appears_in.keys(), appears_in.values())
+        ac = pd.DataFrame(t2, columns=['word', 'appears_in'])
+        wc = ac.merge(wc, on='word')
+
+        wc['appears_in_pct'] = wc['appears_in'].apply(lambda x: x / total_docs)
+
+        return wc.sort_values(by='rank')
+
+    @staticmethod
+    def stopwords(list_in):
+        nlp = spacy.load("en_core_web_lg")
+
+        # Tokenizer
+        tokenizer = Tokenizer(nlp.vocab)
+        return nlp.Defaults.stop_words.union(list_in)
+
+    @staticmethod
+    def combine_stopwords(dataframe_in, stopword_dict):
+        """
+        Please use the above function, stopwords.
+        :param dataframe_in:
+        :param stopword_dict:
+        :return:
+        """
+        nlp = spacy.load("en_core_web_lg")
+
+        # Tokenizer
+        tokenizer = Tokenizer(nlp.vocab)
+
+        tokens = []
+
+        for doc in tokenizer.pipe(dataframe_in, batch_size=500):
+
+            doc_tokens = []
+
+            for token in doc:
+                if token.text.lower() not in stopword_dict:
+                    doc_tokens.append(token.text.lower())
+
+            tokens.append(doc_tokens)
+
+        return tokens
+
+    @staticmethod
+    def lemma_attributes(doc):
+        """
+        Input doc to print lemma attributes
+        :param doc:
+        :return:
+        """
+        for token in doc:
+            print(token.text, "  ", token.lemma_)
+
+
+    @staticmethod
+    def get_lemmas(text):
+        nlp = spacy.load("en_core_web_lg")
+
+        lemmas = []
+
+        doc = nlp(text)
+
+        # Something goes here :P
+        for token in doc:
+            if ((token.is_stop == False) and (token.is_punct == False)) and (token.pos_ != 'PRON'):
+                lemmas.append(token.lemma_)
+
+        return lemmas
 
 
 class FruitfulFunctions(object):
     """
-    Method to process input States
+    Notes from lecture
     """
     @staticmethod
     def df_token(input_df):
@@ -48,7 +145,7 @@ class FruitfulFunctions(object):
 
     @staticmethod
     def df_counts(input_df, bool=True, range_it=50):
-        return input_df.value_counts(normalize=bool)[:range]
+        return input_df.value_counts(normalize=bool)[:range_it]
 
     @staticmethod
     def df_split(input_df):
@@ -98,7 +195,7 @@ class FruitfulFunctions(object):
     @staticmethod
     def count_tokens(df_in, integer=10):
         """
-
+        counts words
         :param df_in:
         :param integer:
         :return:
@@ -150,7 +247,7 @@ class Visualize(object):
     @staticmethod
     def distribution_plot(df_in):
         """
-
+        inputs dataframe and returns seaborn lineplot
         :param df_in:
         :return:
         """
@@ -174,16 +271,7 @@ class Visualize(object):
         return sns.lineplot(x='rank', y='cul_pct_total', data=wc);
 
 
-class StopWords(object):
-    @staticmethod
-    def stap():
-        return 't'
-
-import spacy
-from spacy.tokenizer import Tokenizer
-
 class SpacyFruitfulFunctions(object):
-
     @staticmethod
     def stem_this(list_in):
         """
@@ -196,75 +284,6 @@ class SpacyFruitfulFunctions(object):
         for word in list_in:
             state.append(ps.stem(word))
         return state
-
-
-# Created these functions in classes so they are more modular
-from collections import Counter
-
-
-class HandleTokens(object):
-    """
-    Method from assignment
-    """
-    @staticmethod
-    def tokenize(df_in):
-        """
-        Function, df_in input, to output a tokenized list.
-        :param df_in:
-        :return:
-        """
-        nlp = spacy.load("en_core_web_lg")
-        tokenizer = Tokenizer(nlp.vocab)
-        tokens = []
-        for doc in tokenizer.pipe(df_in, batch_size=500):
-            doc_tokens = [token.text for token in doc]
-            tokens.append(doc_tokens)
-        return tokens
-
-    @staticmethod
-    def count(docs):
-        """
-        Function. import a dataframe, to count the words as an output.
-        :param docs:
-        :return:
-        """
-        word_counts = Counter()
-        appears_in = Counter()
-
-        total_docs = len(docs)
-
-        for doc in docs:
-            word_counts.update(doc)
-            appears_in.update(set(doc))
-
-        temp = zip(word_counts.keys(), word_counts.values())
-
-        wc = pd.DataFrame(temp, columns=['word', 'count'])
-
-        wc['rank'] = wc['count'].rank(method='first', ascending=False)
-        total = wc['count'].sum()
-
-        wc['pct_total'] = wc['count'].apply(lambda x: x / total)
-
-        wc = wc.sort_values(by='rank')
-        wc['cul_pct_total'] = wc['pct_total'].cumsum()
-
-        t2 = zip(appears_in.keys(), appears_in.values())
-        ac = pd.DataFrame(t2, columns=['word', 'appears_in'])
-        wc = ac.merge(wc, on='word')
-
-        wc['appears_in_pct'] = wc['appears_in'].apply(lambda x: x / total_docs)
-
-        return wc.sort_values(by='rank')
-
-    @staticmethod
-    def squarify_this(df):
-        """
-        Import a dataframe, outputs a visualiztion.
-        :param df:
-        :return:
-        """
-        return squarify.plot(sizes=df["pct_total"], label=df["cul_pct_total"], alpha=.8 )
 
 
 if __name__ == "__main__":

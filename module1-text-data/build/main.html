@@ -36,34 +36,131 @@ from collections import Counter
 import spacy
 from spacy.tokenizer import Tokenizer
 
+from collections import Counter
 
-class State(object):
-    def __init__(self):
-        self._test = 100
 
-    @property
-    def test(self):
+class HandleTokens(object):
+    &#34;&#34;&#34;
+    Created these functions as modules, some important methods used to finish assignment 1.
+    &#34;&#34;&#34;
+    @staticmethod
+    def tokenize(df_in):
         &#34;&#34;&#34;
-        Function to report the state _test
-        :return: test
-        &#34;&#34;&#34;
-        print(self._test)
-        return self._test
-
-    @test.setter
-    def test(self, value):
-        &#34;&#34;&#34;
-        Inputs value into function to be saved into state _test
-        :param value:
+        Tokenize by inputting a dataframe.
+        :param df_in:
         :return:
         &#34;&#34;&#34;
-        print(value)
-        self._test = value
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+        # Tokenizer
+        tokenizer = Tokenizer(nlp.vocab)
+        tokens = []
+        for doc in tokenizer.pipe(df_in, batch_size=500):
+            doc_tokens = [token.text for token in doc]
+            tokens.append(doc_tokens)
+        return tokens
+
+    @staticmethod
+    def count(docs):
+        &#34;&#34;&#34;
+        Count words in
+        :param docs:
+        :return:
+        &#34;&#34;&#34;
+        word_counts = Counter()
+        appears_in = Counter()
+
+        total_docs = len(docs)
+
+        for doc in docs:
+            word_counts.update(doc)
+            appears_in.update(set(doc))
+
+        temp = zip(word_counts.keys(), word_counts.values())
+
+        wc = pd.DataFrame(temp, columns=[&#39;word&#39;, &#39;count&#39;])
+
+        wc[&#39;rank&#39;] = wc[&#39;count&#39;].rank(method=&#39;first&#39;, ascending=False)
+        total = wc[&#39;count&#39;].sum()
+
+        wc[&#39;pct_total&#39;] = wc[&#39;count&#39;].apply(lambda x: x / total)
+
+        wc = wc.sort_values(by=&#39;rank&#39;)
+        wc[&#39;cul_pct_total&#39;] = wc[&#39;pct_total&#39;].cumsum()
+
+        t2 = zip(appears_in.keys(), appears_in.values())
+        ac = pd.DataFrame(t2, columns=[&#39;word&#39;, &#39;appears_in&#39;])
+        wc = ac.merge(wc, on=&#39;word&#39;)
+
+        wc[&#39;appears_in_pct&#39;] = wc[&#39;appears_in&#39;].apply(lambda x: x / total_docs)
+
+        return wc.sort_values(by=&#39;rank&#39;)
+
+    @staticmethod
+    def stopwords(list_in):
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+        # Tokenizer
+        tokenizer = Tokenizer(nlp.vocab)
+        return nlp.Defaults.stop_words.union(list_in)
+
+    @staticmethod
+    def combine_stopwords(dataframe_in, stopword_dict):
+        &#34;&#34;&#34;
+        Please use the above function, stopwords.
+        :param dataframe_in:
+        :param stopword_dict:
+        :return:
+        &#34;&#34;&#34;
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+        # Tokenizer
+        tokenizer = Tokenizer(nlp.vocab)
+
+        tokens = []
+
+        for doc in tokenizer.pipe(dataframe_in, batch_size=500):
+
+            doc_tokens = []
+
+            for token in doc:
+                if token.text.lower() not in stopword_dict:
+                    doc_tokens.append(token.text.lower())
+
+            tokens.append(doc_tokens)
+
+        return tokens
+
+    @staticmethod
+    def lemma_attributes(doc):
+        &#34;&#34;&#34;
+        Input doc to print lemma attributes
+        :param doc:
+        :return:
+        &#34;&#34;&#34;
+        for token in doc:
+            print(token.text, &#34;  &#34;, token.lemma_)
+
+
+    @staticmethod
+    def get_lemmas(text):
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+        lemmas = []
+
+        doc = nlp(text)
+
+        # Something goes here :P
+        for token in doc:
+            if ((token.is_stop == False) and (token.is_punct == False)) and (token.pos_ != &#39;PRON&#39;):
+                lemmas.append(token.lemma_)
+
+        return lemmas
 
 
 class FruitfulFunctions(object):
     &#34;&#34;&#34;
-    Method to process input States
+    Notes from lecture
     &#34;&#34;&#34;
     @staticmethod
     def df_token(input_df):
@@ -76,7 +173,7 @@ class FruitfulFunctions(object):
 
     @staticmethod
     def df_counts(input_df, bool=True, range_it=50):
-        return input_df.value_counts(normalize=bool)[:range]
+        return input_df.value_counts(normalize=bool)[:range_it]
 
     @staticmethod
     def df_split(input_df):
@@ -126,7 +223,7 @@ class FruitfulFunctions(object):
     @staticmethod
     def count_tokens(df_in, integer=10):
         &#34;&#34;&#34;
-
+        counts words
         :param df_in:
         :param integer:
         :return:
@@ -178,7 +275,7 @@ class Visualize(object):
     @staticmethod
     def distribution_plot(df_in):
         &#34;&#34;&#34;
-
+        inputs dataframe and returns seaborn lineplot
         :param df_in:
         :return:
         &#34;&#34;&#34;
@@ -202,16 +299,7 @@ class Visualize(object):
         return sns.lineplot(x=&#39;rank&#39;, y=&#39;cul_pct_total&#39;, data=wc);
 
 
-class StopWords(object):
-    @staticmethod
-    def stap():
-        return &#39;t&#39;
-
-import spacy
-from spacy.tokenizer import Tokenizer
-
 class SpacyFruitfulFunctions(object):
-
     @staticmethod
     def stem_this(list_in):
         &#34;&#34;&#34;
@@ -224,75 +312,6 @@ class SpacyFruitfulFunctions(object):
         for word in list_in:
             state.append(ps.stem(word))
         return state
-
-
-# Created these functions in classes so they are more modular
-from collections import Counter
-
-
-class HandleTokens(object):
-    &#34;&#34;&#34;
-    Method from assignment
-    &#34;&#34;&#34;
-    @staticmethod
-    def tokenize(df_in):
-        &#34;&#34;&#34;
-        Function, df_in input, to output a tokenized list.
-        :param df_in:
-        :return:
-        &#34;&#34;&#34;
-        nlp = spacy.load(&#34;en_core_web_lg&#34;)
-        tokenizer = Tokenizer(nlp.vocab)
-        tokens = []
-        for doc in tokenizer.pipe(df_in, batch_size=500):
-            doc_tokens = [token.text for token in doc]
-            tokens.append(doc_tokens)
-        return tokens
-
-    @staticmethod
-    def count(docs):
-        &#34;&#34;&#34;
-        Function. import a dataframe, to count the words as an output.
-        :param docs:
-        :return:
-        &#34;&#34;&#34;
-        word_counts = Counter()
-        appears_in = Counter()
-
-        total_docs = len(docs)
-
-        for doc in docs:
-            word_counts.update(doc)
-            appears_in.update(set(doc))
-
-        temp = zip(word_counts.keys(), word_counts.values())
-
-        wc = pd.DataFrame(temp, columns=[&#39;word&#39;, &#39;count&#39;])
-
-        wc[&#39;rank&#39;] = wc[&#39;count&#39;].rank(method=&#39;first&#39;, ascending=False)
-        total = wc[&#39;count&#39;].sum()
-
-        wc[&#39;pct_total&#39;] = wc[&#39;count&#39;].apply(lambda x: x / total)
-
-        wc = wc.sort_values(by=&#39;rank&#39;)
-        wc[&#39;cul_pct_total&#39;] = wc[&#39;pct_total&#39;].cumsum()
-
-        t2 = zip(appears_in.keys(), appears_in.values())
-        ac = pd.DataFrame(t2, columns=[&#39;word&#39;, &#39;appears_in&#39;])
-        wc = ac.merge(wc, on=&#39;word&#39;)
-
-        wc[&#39;appears_in_pct&#39;] = wc[&#39;appears_in&#39;].apply(lambda x: x / total_docs)
-
-        return wc.sort_values(by=&#39;rank&#39;)
-
-    @staticmethod
-    def squarify_this(df):
-        &#34;&#34;&#34;
-        Import a dataframe, outputs a visualiztion.
-        :param df:
-        :return:
-        &#34;&#34;&#34;
-        return squarify.plot(sizes=df[&#34;pct_total&#34;], label=df[&#34;cul_pct_total&#34;], alpha=.8 )
 
 
 if __name__ == &#34;__main__&#34;:
@@ -312,14 +331,14 @@ if __name__ == &#34;__main__&#34;:
 <span>class <span class="ident">FruitfulFunctions</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Method to process input States</p></div>
+<div class="desc"><p>Notes from lecture</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class FruitfulFunctions(object):
     &#34;&#34;&#34;
-    Method to process input States
+    Notes from lecture
     &#34;&#34;&#34;
     @staticmethod
     def df_token(input_df):
@@ -332,7 +351,7 @@ if __name__ == &#34;__main__&#34;:
 
     @staticmethod
     def df_counts(input_df, bool=True, range_it=50):
-        return input_df.value_counts(normalize=bool)[:range]
+        return input_df.value_counts(normalize=bool)[:range_it]
 
     @staticmethod
     def df_split(input_df):
@@ -382,7 +401,7 @@ if __name__ == &#34;__main__&#34;:
     @staticmethod
     def count_tokens(df_in, integer=10):
         &#34;&#34;&#34;
-
+        counts words
         :param df_in:
         :param integer:
         :return:
@@ -482,7 +501,8 @@ def count_pipeline(df_in):
 <span>def <span class="ident">count_tokens</span></span>(<span>df_in, integer=10)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>:param df_in:
+<div class="desc"><p>counts words
+:param df_in:
 :param integer:
 :return:</p></div>
 <details class="source">
@@ -492,7 +512,7 @@ def count_pipeline(df_in):
 <pre><code class="python">@staticmethod
 def count_tokens(df_in, integer=10):
     &#34;&#34;&#34;
-
+    counts words
     :param df_in:
     :param integer:
     :return:
@@ -534,7 +554,7 @@ def df_alphanumeric(input_df):
 </summary>
 <pre><code class="python">@staticmethod
 def df_counts(input_df, bool=True, range_it=50):
-    return input_df.value_counts(normalize=bool)[:range]</code></pre>
+    return input_df.value_counts(normalize=bool)[:range_it]</code></pre>
 </details>
 </dd>
 <dt id="main.FruitfulFunctions.df_lower"><code class="name flex">
@@ -646,23 +666,25 @@ def df_upper(input_df):
 <span>class <span class="ident">HandleTokens</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Method from assignment</p></div>
+<div class="desc"><p>Created these functions as modules, some important methods used to finish assignment 1.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class HandleTokens(object):
     &#34;&#34;&#34;
-    Method from assignment
+    Created these functions as modules, some important methods used to finish assignment 1.
     &#34;&#34;&#34;
     @staticmethod
     def tokenize(df_in):
         &#34;&#34;&#34;
-        Function, df_in input, to output a tokenized list.
+        Tokenize by inputting a dataframe.
         :param df_in:
         :return:
         &#34;&#34;&#34;
         nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+        # Tokenizer
         tokenizer = Tokenizer(nlp.vocab)
         tokens = []
         for doc in tokenizer.pipe(df_in, batch_size=500):
@@ -673,7 +695,7 @@ def df_upper(input_df):
     @staticmethod
     def count(docs):
         &#34;&#34;&#34;
-        Function. import a dataframe, to count the words as an output.
+        Count words in
         :param docs:
         :return:
         &#34;&#34;&#34;
@@ -707,21 +729,113 @@ def df_upper(input_df):
         return wc.sort_values(by=&#39;rank&#39;)
 
     @staticmethod
-    def squarify_this(df):
+    def stopwords(list_in):
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+        # Tokenizer
+        tokenizer = Tokenizer(nlp.vocab)
+        return nlp.Defaults.stop_words.union(list_in)
+
+    @staticmethod
+    def combine_stopwords(dataframe_in, stopword_dict):
         &#34;&#34;&#34;
-        Import a dataframe, outputs a visualiztion.
-        :param df:
+        Please use the above function, stopwords.
+        :param dataframe_in:
+        :param stopword_dict:
         :return:
         &#34;&#34;&#34;
-        return squarify.plot(sizes=df[&#34;pct_total&#34;], label=df[&#34;cul_pct_total&#34;], alpha=.8 )</code></pre>
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+        # Tokenizer
+        tokenizer = Tokenizer(nlp.vocab)
+
+        tokens = []
+
+        for doc in tokenizer.pipe(dataframe_in, batch_size=500):
+
+            doc_tokens = []
+
+            for token in doc:
+                if token.text.lower() not in stopword_dict:
+                    doc_tokens.append(token.text.lower())
+
+            tokens.append(doc_tokens)
+
+        return tokens
+
+    @staticmethod
+    def lemma_attributes(doc):
+        &#34;&#34;&#34;
+        Input doc to print lemma attributes
+        :param doc:
+        :return:
+        &#34;&#34;&#34;
+        for token in doc:
+            print(token.text, &#34;  &#34;, token.lemma_)
+
+
+    @staticmethod
+    def get_lemmas(text):
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+        lemmas = []
+
+        doc = nlp(text)
+
+        # Something goes here :P
+        for token in doc:
+            if ((token.is_stop == False) and (token.is_punct == False)) and (token.pos_ != &#39;PRON&#39;):
+                lemmas.append(token.lemma_)
+
+        return lemmas</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
+<dt id="main.HandleTokens.combine_stopwords"><code class="name flex">
+<span>def <span class="ident">combine_stopwords</span></span>(<span>dataframe_in, stopword_dict)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Please use the above function, stopwords.
+:param dataframe_in:
+:param stopword_dict:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def combine_stopwords(dataframe_in, stopword_dict):
+    &#34;&#34;&#34;
+    Please use the above function, stopwords.
+    :param dataframe_in:
+    :param stopword_dict:
+    :return:
+    &#34;&#34;&#34;
+    nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+    # Tokenizer
+    tokenizer = Tokenizer(nlp.vocab)
+
+    tokens = []
+
+    for doc in tokenizer.pipe(dataframe_in, batch_size=500):
+
+        doc_tokens = []
+
+        for token in doc:
+            if token.text.lower() not in stopword_dict:
+                doc_tokens.append(token.text.lower())
+
+        tokens.append(doc_tokens)
+
+    return tokens</code></pre>
+</details>
+</dd>
 <dt id="main.HandleTokens.count"><code class="name flex">
 <span>def <span class="ident">count</span></span>(<span>docs)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Function. import a dataframe, to count the words as an output.
+<div class="desc"><p>Count words in
 :param docs:
 :return:</p></div>
 <details class="source">
@@ -731,7 +845,7 @@ def df_upper(input_df):
 <pre><code class="python">@staticmethod
 def count(docs):
     &#34;&#34;&#34;
-    Function. import a dataframe, to count the words as an output.
+    Count words in
     :param docs:
     :return:
     &#34;&#34;&#34;
@@ -765,32 +879,76 @@ def count(docs):
     return wc.sort_values(by=&#39;rank&#39;)</code></pre>
 </details>
 </dd>
-<dt id="main.HandleTokens.squarify_this"><code class="name flex">
-<span>def <span class="ident">squarify_this</span></span>(<span>df)</span>
+<dt id="main.HandleTokens.get_lemmas"><code class="name flex">
+<span>def <span class="ident">get_lemmas</span></span>(<span>text)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Import a dataframe, outputs a visualiztion.
-:param df:
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def get_lemmas(text):
+    nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+    lemmas = []
+
+    doc = nlp(text)
+
+    # Something goes here :P
+    for token in doc:
+        if ((token.is_stop == False) and (token.is_punct == False)) and (token.pos_ != &#39;PRON&#39;):
+            lemmas.append(token.lemma_)
+
+    return lemmas</code></pre>
+</details>
+</dd>
+<dt id="main.HandleTokens.lemma_attributes"><code class="name flex">
+<span>def <span class="ident">lemma_attributes</span></span>(<span>doc)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Input doc to print lemma attributes
+:param doc:
 :return:</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def squarify_this(df):
+def lemma_attributes(doc):
     &#34;&#34;&#34;
-    Import a dataframe, outputs a visualiztion.
-    :param df:
+    Input doc to print lemma attributes
+    :param doc:
     :return:
     &#34;&#34;&#34;
-    return squarify.plot(sizes=df[&#34;pct_total&#34;], label=df[&#34;cul_pct_total&#34;], alpha=.8 )</code></pre>
+    for token in doc:
+        print(token.text, &#34;  &#34;, token.lemma_)</code></pre>
+</details>
+</dd>
+<dt id="main.HandleTokens.stopwords"><code class="name flex">
+<span>def <span class="ident">stopwords</span></span>(<span>list_in)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def stopwords(list_in):
+    nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+    # Tokenizer
+    tokenizer = Tokenizer(nlp.vocab)
+    return nlp.Defaults.stop_words.union(list_in)</code></pre>
 </details>
 </dd>
 <dt id="main.HandleTokens.tokenize"><code class="name flex">
 <span>def <span class="ident">tokenize</span></span>(<span>df_in)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Function, df_in input, to output a tokenized list.
+<div class="desc"><p>Tokenize by inputting a dataframe.
 :param df_in:
 :return:</p></div>
 <details class="source">
@@ -800,11 +958,13 @@ def squarify_this(df):
 <pre><code class="python">@staticmethod
 def tokenize(df_in):
     &#34;&#34;&#34;
-    Function, df_in input, to output a tokenized list.
+    Tokenize by inputting a dataframe.
     :param df_in:
     :return:
     &#34;&#34;&#34;
     nlp = spacy.load(&#34;en_core_web_lg&#34;)
+
+    # Tokenizer
     tokenizer = Tokenizer(nlp.vocab)
     tokens = []
     for doc in tokenizer.pipe(df_in, batch_size=500):
@@ -825,7 +985,6 @@ def tokenize(df_in):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class SpacyFruitfulFunctions(object):
-
     @staticmethod
     def stem_this(list_in):
         &#34;&#34;&#34;
@@ -868,92 +1027,6 @@ def stem_this(list_in):
 </dd>
 </dl>
 </dd>
-<dt id="main.State"><code class="flex name class">
-<span>class <span class="ident">State</span></span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class State(object):
-    def __init__(self):
-        self._test = 100
-
-    @property
-    def test(self):
-        &#34;&#34;&#34;
-        Function to report the state _test
-        :return: test
-        &#34;&#34;&#34;
-        print(self._test)
-        return self._test
-
-    @test.setter
-    def test(self, value):
-        &#34;&#34;&#34;
-        Inputs value into function to be saved into state _test
-        :param value:
-        :return:
-        &#34;&#34;&#34;
-        print(value)
-        self._test = value</code></pre>
-</details>
-<h3>Instance variables</h3>
-<dl>
-<dt id="main.State.test"><code class="name">var <span class="ident">test</span></code></dt>
-<dd>
-<div class="desc"><p>Function to report the state _test
-:return: test</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@property
-def test(self):
-    &#34;&#34;&#34;
-    Function to report the state _test
-    :return: test
-    &#34;&#34;&#34;
-    print(self._test)
-    return self._test</code></pre>
-</details>
-</dd>
-</dl>
-</dd>
-<dt id="main.StopWords"><code class="flex name class">
-<span>class <span class="ident">StopWords</span></span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class StopWords(object):
-    @staticmethod
-    def stap():
-        return &#39;t&#39;</code></pre>
-</details>
-<h3>Static methods</h3>
-<dl>
-<dt id="main.StopWords.stap"><code class="name flex">
-<span>def <span class="ident">stap</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@staticmethod
-def stap():
-    return &#39;t&#39;</code></pre>
-</details>
-</dd>
-</dl>
-</dd>
 <dt id="main.Visualize"><code class="flex name class">
 <span>class <span class="ident">Visualize</span></span>
 </code></dt>
@@ -968,7 +1041,7 @@ def stap():
     @staticmethod
     def distribution_plot(df_in):
         &#34;&#34;&#34;
-
+        inputs dataframe and returns seaborn lineplot
         :param df_in:
         :return:
         &#34;&#34;&#34;
@@ -997,7 +1070,8 @@ def stap():
 <span>def <span class="ident">distribution_plot</span></span>(<span>df_in)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>:param df_in:
+<div class="desc"><p>inputs dataframe and returns seaborn lineplot
+:param df_in:
 :return:</p></div>
 <details class="source">
 <summary>
@@ -1006,7 +1080,7 @@ def stap():
 <pre><code class="python">@staticmethod
 def distribution_plot(df_in):
     &#34;&#34;&#34;
-
+    inputs dataframe and returns seaborn lineplot
     :param df_in:
     :return:
     &#34;&#34;&#34;
@@ -1080,9 +1154,12 @@ def trimming(wc):
 </li>
 <li>
 <h4><code><a title="main.HandleTokens" href="#main.HandleTokens">HandleTokens</a></code></h4>
-<ul class="">
+<ul class="two-column">
+<li><code><a title="main.HandleTokens.combine_stopwords" href="#main.HandleTokens.combine_stopwords">combine_stopwords</a></code></li>
 <li><code><a title="main.HandleTokens.count" href="#main.HandleTokens.count">count</a></code></li>
-<li><code><a title="main.HandleTokens.squarify_this" href="#main.HandleTokens.squarify_this">squarify_this</a></code></li>
+<li><code><a title="main.HandleTokens.get_lemmas" href="#main.HandleTokens.get_lemmas">get_lemmas</a></code></li>
+<li><code><a title="main.HandleTokens.lemma_attributes" href="#main.HandleTokens.lemma_attributes">lemma_attributes</a></code></li>
+<li><code><a title="main.HandleTokens.stopwords" href="#main.HandleTokens.stopwords">stopwords</a></code></li>
 <li><code><a title="main.HandleTokens.tokenize" href="#main.HandleTokens.tokenize">tokenize</a></code></li>
 </ul>
 </li>
@@ -1090,18 +1167,6 @@ def trimming(wc):
 <h4><code><a title="main.SpacyFruitfulFunctions" href="#main.SpacyFruitfulFunctions">SpacyFruitfulFunctions</a></code></h4>
 <ul class="">
 <li><code><a title="main.SpacyFruitfulFunctions.stem_this" href="#main.SpacyFruitfulFunctions.stem_this">stem_this</a></code></li>
-</ul>
-</li>
-<li>
-<h4><code><a title="main.State" href="#main.State">State</a></code></h4>
-<ul class="">
-<li><code><a title="main.State.test" href="#main.State.test">test</a></code></li>
-</ul>
-</li>
-<li>
-<h4><code><a title="main.StopWords" href="#main.StopWords">StopWords</a></code></h4>
-<ul class="">
-<li><code><a title="main.StopWords.stap" href="#main.StopWords.stap">stap</a></code></li>
 </ul>
 </li>
 <li>
