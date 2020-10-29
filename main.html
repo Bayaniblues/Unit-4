@@ -46,7 +46,7 @@ class HandleTokens(object):
     @staticmethod
     def tokenize(df_in):
         &#34;&#34;&#34;
-        Tokenize by inputting a dataframe.
+        Tokenize by inputting a dataframe. Outputs a tokenized list.
         :param df_in:
         :return:
         &#34;&#34;&#34;
@@ -63,7 +63,7 @@ class HandleTokens(object):
     @staticmethod
     def count(docs):
         &#34;&#34;&#34;
-        Count words in
+        Count words in inputted dataframe, and sorts them by rank.
         :param docs:
         :return:
         &#34;&#34;&#34;
@@ -98,6 +98,12 @@ class HandleTokens(object):
 
     @staticmethod
     def stopwords(list_in):
+        &#34;&#34;&#34;
+        Stopwords are to be removed from our tokenized list, please initiate this function first
+        before inputted into the combine_stopwords() function. Or use this function as a functor.
+        :param list_in:
+        :return:
+        &#34;&#34;&#34;
         nlp = spacy.load(&#34;en_core_web_lg&#34;)
 
         # Tokenizer
@@ -107,7 +113,8 @@ class HandleTokens(object):
     @staticmethod
     def combine_stopwords(dataframe_in, stopword_dict):
         &#34;&#34;&#34;
-        Please use the above function, stopwords.
+        Please use the stopwords() function and input that into the stopword_dict parameter.
+        returns filtered tokens.
         :param dataframe_in:
         :param stopword_dict:
         :return:
@@ -144,6 +151,15 @@ class HandleTokens(object):
 
     @staticmethod
     def get_lemmas(text):
+        &#34;&#34;&#34;
+        Lemmatization, The goal is to transform a word into its base form called a lemma.
+        Plural nouns with funky spellings get transformed to singular tense.
+        Verbs are all transformed to the transitive.
+        Nice tidy data for a visualization
+
+        :param text:
+        :return:
+        &#34;&#34;&#34;
         nlp = spacy.load(&#34;en_core_web_lg&#34;)
 
         lemmas = []
@@ -678,7 +694,7 @@ def df_upper(input_df):
     @staticmethod
     def tokenize(df_in):
         &#34;&#34;&#34;
-        Tokenize by inputting a dataframe.
+        Tokenize by inputting a dataframe. Outputs a tokenized list.
         :param df_in:
         :return:
         &#34;&#34;&#34;
@@ -695,7 +711,7 @@ def df_upper(input_df):
     @staticmethod
     def count(docs):
         &#34;&#34;&#34;
-        Count words in
+        Count words in inputted dataframe, and sorts them by rank.
         :param docs:
         :return:
         &#34;&#34;&#34;
@@ -730,6 +746,12 @@ def df_upper(input_df):
 
     @staticmethod
     def stopwords(list_in):
+        &#34;&#34;&#34;
+        Stopwords are to be removed from our tokenized list, please initiate this function first
+        before inputted into the combine_stopwords() function. Or use this function as a functor.
+        :param list_in:
+        :return:
+        &#34;&#34;&#34;
         nlp = spacy.load(&#34;en_core_web_lg&#34;)
 
         # Tokenizer
@@ -739,7 +761,8 @@ def df_upper(input_df):
     @staticmethod
     def combine_stopwords(dataframe_in, stopword_dict):
         &#34;&#34;&#34;
-        Please use the above function, stopwords.
+        Please use the stopwords() function and input that into the stopword_dict parameter.
+        returns filtered tokens.
         :param dataframe_in:
         :param stopword_dict:
         :return:
@@ -776,6 +799,15 @@ def df_upper(input_df):
 
     @staticmethod
     def get_lemmas(text):
+        &#34;&#34;&#34;
+        Lemmatization, The goal is to transform a word into its base form called a lemma.
+        Plural nouns with funky spellings get transformed to singular tense.
+        Verbs are all transformed to the transitive.
+        Nice tidy data for a visualization
+
+        :param text:
+        :return:
+        &#34;&#34;&#34;
         nlp = spacy.load(&#34;en_core_web_lg&#34;)
 
         lemmas = []
@@ -795,7 +827,8 @@ def df_upper(input_df):
 <span>def <span class="ident">combine_stopwords</span></span>(<span>dataframe_in, stopword_dict)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Please use the above function, stopwords.
+<div class="desc"><p>Please use the stopwords() function and input that into the stopword_dict parameter.
+returns filtered tokens.
 :param dataframe_in:
 :param stopword_dict:
 :return:</p></div>
@@ -806,7 +839,8 @@ def df_upper(input_df):
 <pre><code class="python">@staticmethod
 def combine_stopwords(dataframe_in, stopword_dict):
     &#34;&#34;&#34;
-    Please use the above function, stopwords.
+    Please use the stopwords() function and input that into the stopword_dict parameter.
+    returns filtered tokens.
     :param dataframe_in:
     :param stopword_dict:
     :return:
@@ -835,7 +869,7 @@ def combine_stopwords(dataframe_in, stopword_dict):
 <span>def <span class="ident">count</span></span>(<span>docs)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Count words in
+<div class="desc"><p>Count words in inputted dataframe, and sorts them by rank.
 :param docs:
 :return:</p></div>
 <details class="source">
@@ -845,7 +879,7 @@ def combine_stopwords(dataframe_in, stopword_dict):
 <pre><code class="python">@staticmethod
 def count(docs):
     &#34;&#34;&#34;
-    Count words in
+    Count words in inputted dataframe, and sorts them by rank.
     :param docs:
     :return:
     &#34;&#34;&#34;
@@ -883,13 +917,27 @@ def count(docs):
 <span>def <span class="ident">get_lemmas</span></span>(<span>text)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Lemmatization, The goal is to transform a word into its base form called a lemma.
+Plural nouns with funky spellings get transformed to singular tense.
+Verbs are all transformed to the transitive.
+Nice tidy data for a visualization</p>
+<p>:param text:
+:return:</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
 def get_lemmas(text):
+    &#34;&#34;&#34;
+    Lemmatization, The goal is to transform a word into its base form called a lemma.
+    Plural nouns with funky spellings get transformed to singular tense.
+    Verbs are all transformed to the transitive.
+    Nice tidy data for a visualization
+
+    :param text:
+    :return:
+    &#34;&#34;&#34;
     nlp = spacy.load(&#34;en_core_web_lg&#34;)
 
     lemmas = []
@@ -930,13 +978,22 @@ def lemma_attributes(doc):
 <span>def <span class="ident">stopwords</span></span>(<span>list_in)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Stopwords are to be removed from our tokenized list, please initiate this function first
+before inputted into the combine_stopwords() function. Or use this function as a functor.
+:param list_in:
+:return:</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
 def stopwords(list_in):
+    &#34;&#34;&#34;
+    Stopwords are to be removed from our tokenized list, please initiate this function first
+    before inputted into the combine_stopwords() function. Or use this function as a functor.
+    :param list_in:
+    :return:
+    &#34;&#34;&#34;
     nlp = spacy.load(&#34;en_core_web_lg&#34;)
 
     # Tokenizer
@@ -948,7 +1005,7 @@ def stopwords(list_in):
 <span>def <span class="ident">tokenize</span></span>(<span>df_in)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Tokenize by inputting a dataframe.
+<div class="desc"><p>Tokenize by inputting a dataframe. Outputs a tokenized list.
 :param df_in:
 :return:</p></div>
 <details class="source">
@@ -958,7 +1015,7 @@ def stopwords(list_in):
 <pre><code class="python">@staticmethod
 def tokenize(df_in):
     &#34;&#34;&#34;
-    Tokenize by inputting a dataframe.
+    Tokenize by inputting a dataframe. Outputs a tokenized list.
     :param df_in:
     :return:
     &#34;&#34;&#34;
