@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>main API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>main</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import re
+from collections import Counter
+import pandas as pd
+import seaborn as sns
+import squarify
+import matplotlib.pyplot as plt
+from collections import Counter
+import spacy
+from spacy.tokenizer import Tokenizer
+
+
+class State(object):
+    def __init__(self):
+        self._test = 100
+
+    @property
+    def test(self):
+        &#34;&#34;&#34;
+        Function to report the state _test
+        :return: test
+        &#34;&#34;&#34;
+        print(self._test)
+        return self._test
+
+    @test.setter
+    def test(self, value):
+        &#34;&#34;&#34;
+        Inputs value into function to be saved into state _test
+        :param value:
+        :return:
+        &#34;&#34;&#34;
+        print(value)
+        self._test = value
+
+
+class FruitfulFunctions(object):
+    &#34;&#34;&#34;
+    Method to process input States
+    &#34;&#34;&#34;
+    @staticmethod
+    def df_token(input_df):
+        &#34;&#34;&#34;
+        Tokenization, input string type to output list.
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return list(input_df)
+
+    @staticmethod
+    def df_counts(input_df, bool=True, range_it=50):
+        return input_df.value_counts(normalize=bool)[:range]
+
+    @staticmethod
+    def df_split(input_df):
+        &#34;&#34;&#34;
+
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return input_df.split(&#34; &#34;)
+
+    @staticmethod
+    def df_lower(input_df):
+        &#34;&#34;&#34;
+        Case Normalization, input df[&#39;example&#39;], to output values as lowercase
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return input_df.apply(lambda x: x.lower())
+
+    @staticmethod
+    def df_upper(input_df):
+        &#34;&#34;&#34;
+        Case Normalization, input df[&#39;example&#39;], to output values as uppercase
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return input_df.apply(lambda x: x.upper())
+
+    @staticmethod
+    def df_alphanumeric(input_df):
+        &#34;&#34;&#34;
+
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return re.sub(&#39;[^a-zA-Z 0-9]&#39;, &#39;&#39;, input_df)
+
+    @staticmethod
+    def df_raw_count(input_df):
+        &#34;&#34;&#34;
+
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return input_df.value_counts(normalize=True)[:50]
+
+    @staticmethod
+    def count_tokens(df_in, integer=10):
+        &#34;&#34;&#34;
+
+        :param df_in:
+        :param integer:
+        :return:
+        &#34;&#34;&#34;
+
+        word_counts = Counter()
+        df_in.apply(lambda x: word_counts.update(x))
+        return word_counts.most_common(integer)
+
+    @staticmethod
+    def count_pipeline(df_in):
+        &#34;&#34;&#34;
+        Takes a corpus of document and returns a dataframe of word counts to analyze
+        :param df_in:
+        :return:
+        &#34;&#34;&#34;
+        word_counts = Counter()
+        appears_in = Counter()
+
+        total_docs = len(df_in)
+
+        for doc in df_in:
+            word_counts.update(doc)
+            appears_in.update(set(doc))
+
+        temp = zip(word_counts.keys(), word_counts.values())
+
+        wc = pd.DataFrame(temp, columns=[&#39;word&#39;, &#39;count&#39;])
+
+        wc[&#39;rank&#39;] = wc[&#39;count&#39;].rank(method=&#39;first&#39;, ascending=False)
+        total = wc[&#39;count&#39;].sum()
+
+        wc[&#39;pct_total&#39;] = wc[&#39;count&#39;].apply(lambda x: x / total)
+
+        wc = wc.sort_values(by=&#39;rank&#39;)
+        wc[&#39;cul_pct_total&#39;] = wc[&#39;pct_total&#39;].cumsum()
+
+        t2 = zip(appears_in.keys(), appears_in.values())
+        ac = pd.DataFrame(t2, columns=[&#39;word&#39;, &#39;appears_in&#39;])
+        wc = ac.merge(wc, on=&#39;word&#39;)
+
+        wc[&#39;appears_in_pct&#39;] = wc[&#39;appears_in&#39;].apply(lambda x: x / total_docs)
+
+        return wc.sort_values(by=&#39;rank&#39;)
+
+
+class Visualize(object):
+
+    @staticmethod
+    def distribution_plot(df_in):
+        &#34;&#34;&#34;
+
+        :param df_in:
+        :return:
+        &#34;&#34;&#34;
+        return sns.lineplot(x=&#39;rank&#39;, y=&#39;cul_pct_total&#39;, data=df_in)
+
+    @staticmethod
+    def square_plot(wc):
+        &#34;&#34;&#34;
+
+        :param wc:
+        :return:
+        &#34;&#34;&#34;
+        wc_top20 = wc[wc[&#39;rank&#39;] &lt;= 20]
+
+        squarify.plot(sizes=wc_top20[&#39;pct_total&#39;], label=wc_top20[&#39;word&#39;], alpha=.8)
+        plt.axis(&#39;off&#39;)
+        return plt.show()
+
+    @staticmethod
+    def trimming(wc):
+        return sns.lineplot(x=&#39;rank&#39;, y=&#39;cul_pct_total&#39;, data=wc);
+
+
+class StopWords(object):
+    @staticmethod
+    def stap():
+        return &#39;t&#39;
+
+import spacy
+from spacy.tokenizer import Tokenizer
+
+class SpacyFruitfulFunctions(object):
+
+    @staticmethod
+    def stem_this(list_in):
+        &#34;&#34;&#34;
+        stemming removes last few letters of a words
+        :param list_in:
+        :return:
+        &#34;&#34;&#34;
+        ps = PorterStemmer()
+        state = []
+        for word in list_in:
+            state.append(ps.stem(word))
+        return state
+
+
+# Created these functions in classes so they are more modular
+from collections import Counter
+
+
+class HandleTokens(object):
+    &#34;&#34;&#34;
+    Method from assignment
+    &#34;&#34;&#34;
+    @staticmethod
+    def tokenize(df_in):
+        &#34;&#34;&#34;
+        Function, df_in input, to output a tokenized list.
+        :param df_in:
+        :return:
+        &#34;&#34;&#34;
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+        tokenizer = Tokenizer(nlp.vocab)
+        tokens = []
+        for doc in tokenizer.pipe(df_in, batch_size=500):
+            doc_tokens = [token.text for token in doc]
+            tokens.append(doc_tokens)
+        return tokens
+
+    @staticmethod
+    def count(docs):
+        &#34;&#34;&#34;
+        Function. import a dataframe, to count the words as an output.
+        :param docs:
+        :return:
+        &#34;&#34;&#34;
+        word_counts = Counter()
+        appears_in = Counter()
+
+        total_docs = len(docs)
+
+        for doc in docs:
+            word_counts.update(doc)
+            appears_in.update(set(doc))
+
+        temp = zip(word_counts.keys(), word_counts.values())
+
+        wc = pd.DataFrame(temp, columns=[&#39;word&#39;, &#39;count&#39;])
+
+        wc[&#39;rank&#39;] = wc[&#39;count&#39;].rank(method=&#39;first&#39;, ascending=False)
+        total = wc[&#39;count&#39;].sum()
+
+        wc[&#39;pct_total&#39;] = wc[&#39;count&#39;].apply(lambda x: x / total)
+
+        wc = wc.sort_values(by=&#39;rank&#39;)
+        wc[&#39;cul_pct_total&#39;] = wc[&#39;pct_total&#39;].cumsum()
+
+        t2 = zip(appears_in.keys(), appears_in.values())
+        ac = pd.DataFrame(t2, columns=[&#39;word&#39;, &#39;appears_in&#39;])
+        wc = ac.merge(wc, on=&#39;word&#39;)
+
+        wc[&#39;appears_in_pct&#39;] = wc[&#39;appears_in&#39;].apply(lambda x: x / total_docs)
+
+        return wc.sort_values(by=&#39;rank&#39;)
+
+    @staticmethod
+    def squarify_this(df):
+        &#34;&#34;&#34;
+        Import a dataframe, outputs a visualiztion.
+        :param df:
+        :return:
+        &#34;&#34;&#34;
+        return squarify.plot(sizes=df[&#34;pct_total&#34;], label=df[&#34;cul_pct_total&#34;], alpha=.8 )
+
+
+if __name__ == &#34;__main__&#34;:
+    print(&#34;test here&#34;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="main.FruitfulFunctions"><code class="flex name class">
+<span>class <span class="ident">FruitfulFunctions</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Method to process input States</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FruitfulFunctions(object):
+    &#34;&#34;&#34;
+    Method to process input States
+    &#34;&#34;&#34;
+    @staticmethod
+    def df_token(input_df):
+        &#34;&#34;&#34;
+        Tokenization, input string type to output list.
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return list(input_df)
+
+    @staticmethod
+    def df_counts(input_df, bool=True, range_it=50):
+        return input_df.value_counts(normalize=bool)[:range]
+
+    @staticmethod
+    def df_split(input_df):
+        &#34;&#34;&#34;
+
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return input_df.split(&#34; &#34;)
+
+    @staticmethod
+    def df_lower(input_df):
+        &#34;&#34;&#34;
+        Case Normalization, input df[&#39;example&#39;], to output values as lowercase
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return input_df.apply(lambda x: x.lower())
+
+    @staticmethod
+    def df_upper(input_df):
+        &#34;&#34;&#34;
+        Case Normalization, input df[&#39;example&#39;], to output values as uppercase
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return input_df.apply(lambda x: x.upper())
+
+    @staticmethod
+    def df_alphanumeric(input_df):
+        &#34;&#34;&#34;
+
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return re.sub(&#39;[^a-zA-Z 0-9]&#39;, &#39;&#39;, input_df)
+
+    @staticmethod
+    def df_raw_count(input_df):
+        &#34;&#34;&#34;
+
+        :param input_df:
+        :return:
+        &#34;&#34;&#34;
+        return input_df.value_counts(normalize=True)[:50]
+
+    @staticmethod
+    def count_tokens(df_in, integer=10):
+        &#34;&#34;&#34;
+
+        :param df_in:
+        :param integer:
+        :return:
+        &#34;&#34;&#34;
+
+        word_counts = Counter()
+        df_in.apply(lambda x: word_counts.update(x))
+        return word_counts.most_common(integer)
+
+    @staticmethod
+    def count_pipeline(df_in):
+        &#34;&#34;&#34;
+        Takes a corpus of document and returns a dataframe of word counts to analyze
+        :param df_in:
+        :return:
+        &#34;&#34;&#34;
+        word_counts = Counter()
+        appears_in = Counter()
+
+        total_docs = len(df_in)
+
+        for doc in df_in:
+            word_counts.update(doc)
+            appears_in.update(set(doc))
+
+        temp = zip(word_counts.keys(), word_counts.values())
+
+        wc = pd.DataFrame(temp, columns=[&#39;word&#39;, &#39;count&#39;])
+
+        wc[&#39;rank&#39;] = wc[&#39;count&#39;].rank(method=&#39;first&#39;, ascending=False)
+        total = wc[&#39;count&#39;].sum()
+
+        wc[&#39;pct_total&#39;] = wc[&#39;count&#39;].apply(lambda x: x / total)
+
+        wc = wc.sort_values(by=&#39;rank&#39;)
+        wc[&#39;cul_pct_total&#39;] = wc[&#39;pct_total&#39;].cumsum()
+
+        t2 = zip(appears_in.keys(), appears_in.values())
+        ac = pd.DataFrame(t2, columns=[&#39;word&#39;, &#39;appears_in&#39;])
+        wc = ac.merge(wc, on=&#39;word&#39;)
+
+        wc[&#39;appears_in_pct&#39;] = wc[&#39;appears_in&#39;].apply(lambda x: x / total_docs)
+
+        return wc.sort_values(by=&#39;rank&#39;)</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="main.FruitfulFunctions.count_pipeline"><code class="name flex">
+<span>def <span class="ident">count_pipeline</span></span>(<span>df_in)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes a corpus of document and returns a dataframe of word counts to analyze
+:param df_in:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def count_pipeline(df_in):
+    &#34;&#34;&#34;
+    Takes a corpus of document and returns a dataframe of word counts to analyze
+    :param df_in:
+    :return:
+    &#34;&#34;&#34;
+    word_counts = Counter()
+    appears_in = Counter()
+
+    total_docs = len(df_in)
+
+    for doc in df_in:
+        word_counts.update(doc)
+        appears_in.update(set(doc))
+
+    temp = zip(word_counts.keys(), word_counts.values())
+
+    wc = pd.DataFrame(temp, columns=[&#39;word&#39;, &#39;count&#39;])
+
+    wc[&#39;rank&#39;] = wc[&#39;count&#39;].rank(method=&#39;first&#39;, ascending=False)
+    total = wc[&#39;count&#39;].sum()
+
+    wc[&#39;pct_total&#39;] = wc[&#39;count&#39;].apply(lambda x: x / total)
+
+    wc = wc.sort_values(by=&#39;rank&#39;)
+    wc[&#39;cul_pct_total&#39;] = wc[&#39;pct_total&#39;].cumsum()
+
+    t2 = zip(appears_in.keys(), appears_in.values())
+    ac = pd.DataFrame(t2, columns=[&#39;word&#39;, &#39;appears_in&#39;])
+    wc = ac.merge(wc, on=&#39;word&#39;)
+
+    wc[&#39;appears_in_pct&#39;] = wc[&#39;appears_in&#39;].apply(lambda x: x / total_docs)
+
+    return wc.sort_values(by=&#39;rank&#39;)</code></pre>
+</details>
+</dd>
+<dt id="main.FruitfulFunctions.count_tokens"><code class="name flex">
+<span>def <span class="ident">count_tokens</span></span>(<span>df_in, integer=10)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param df_in:
+:param integer:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def count_tokens(df_in, integer=10):
+    &#34;&#34;&#34;
+
+    :param df_in:
+    :param integer:
+    :return:
+    &#34;&#34;&#34;
+
+    word_counts = Counter()
+    df_in.apply(lambda x: word_counts.update(x))
+    return word_counts.most_common(integer)</code></pre>
+</details>
+</dd>
+<dt id="main.FruitfulFunctions.df_alphanumeric"><code class="name flex">
+<span>def <span class="ident">df_alphanumeric</span></span>(<span>input_df)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param input_df:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def df_alphanumeric(input_df):
+    &#34;&#34;&#34;
+
+    :param input_df:
+    :return:
+    &#34;&#34;&#34;
+    return re.sub(&#39;[^a-zA-Z 0-9]&#39;, &#39;&#39;, input_df)</code></pre>
+</details>
+</dd>
+<dt id="main.FruitfulFunctions.df_counts"><code class="name flex">
+<span>def <span class="ident">df_counts</span></span>(<span>input_df, bool=True, range_it=50)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def df_counts(input_df, bool=True, range_it=50):
+    return input_df.value_counts(normalize=bool)[:range]</code></pre>
+</details>
+</dd>
+<dt id="main.FruitfulFunctions.df_lower"><code class="name flex">
+<span>def <span class="ident">df_lower</span></span>(<span>input_df)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Case Normalization, input df['example'], to output values as lowercase
+:param input_df:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def df_lower(input_df):
+    &#34;&#34;&#34;
+    Case Normalization, input df[&#39;example&#39;], to output values as lowercase
+    :param input_df:
+    :return:
+    &#34;&#34;&#34;
+    return input_df.apply(lambda x: x.lower())</code></pre>
+</details>
+</dd>
+<dt id="main.FruitfulFunctions.df_raw_count"><code class="name flex">
+<span>def <span class="ident">df_raw_count</span></span>(<span>input_df)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param input_df:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def df_raw_count(input_df):
+    &#34;&#34;&#34;
+
+    :param input_df:
+    :return:
+    &#34;&#34;&#34;
+    return input_df.value_counts(normalize=True)[:50]</code></pre>
+</details>
+</dd>
+<dt id="main.FruitfulFunctions.df_split"><code class="name flex">
+<span>def <span class="ident">df_split</span></span>(<span>input_df)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param input_df:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def df_split(input_df):
+    &#34;&#34;&#34;
+
+    :param input_df:
+    :return:
+    &#34;&#34;&#34;
+    return input_df.split(&#34; &#34;)</code></pre>
+</details>
+</dd>
+<dt id="main.FruitfulFunctions.df_token"><code class="name flex">
+<span>def <span class="ident">df_token</span></span>(<span>input_df)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Tokenization, input string type to output list.
+:param input_df:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def df_token(input_df):
+    &#34;&#34;&#34;
+    Tokenization, input string type to output list.
+    :param input_df:
+    :return:
+    &#34;&#34;&#34;
+    return list(input_df)</code></pre>
+</details>
+</dd>
+<dt id="main.FruitfulFunctions.df_upper"><code class="name flex">
+<span>def <span class="ident">df_upper</span></span>(<span>input_df)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Case Normalization, input df['example'], to output values as uppercase
+:param input_df:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def df_upper(input_df):
+    &#34;&#34;&#34;
+    Case Normalization, input df[&#39;example&#39;], to output values as uppercase
+    :param input_df:
+    :return:
+    &#34;&#34;&#34;
+    return input_df.apply(lambda x: x.upper())</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="main.HandleTokens"><code class="flex name class">
+<span>class <span class="ident">HandleTokens</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Method from assignment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class HandleTokens(object):
+    &#34;&#34;&#34;
+    Method from assignment
+    &#34;&#34;&#34;
+    @staticmethod
+    def tokenize(df_in):
+        &#34;&#34;&#34;
+        Function, df_in input, to output a tokenized list.
+        :param df_in:
+        :return:
+        &#34;&#34;&#34;
+        nlp = spacy.load(&#34;en_core_web_lg&#34;)
+        tokenizer = Tokenizer(nlp.vocab)
+        tokens = []
+        for doc in tokenizer.pipe(df_in, batch_size=500):
+            doc_tokens = [token.text for token in doc]
+            tokens.append(doc_tokens)
+        return tokens
+
+    @staticmethod
+    def count(docs):
+        &#34;&#34;&#34;
+        Function. import a dataframe, to count the words as an output.
+        :param docs:
+        :return:
+        &#34;&#34;&#34;
+        word_counts = Counter()
+        appears_in = Counter()
+
+        total_docs = len(docs)
+
+        for doc in docs:
+            word_counts.update(doc)
+            appears_in.update(set(doc))
+
+        temp = zip(word_counts.keys(), word_counts.values())
+
+        wc = pd.DataFrame(temp, columns=[&#39;word&#39;, &#39;count&#39;])
+
+        wc[&#39;rank&#39;] = wc[&#39;count&#39;].rank(method=&#39;first&#39;, ascending=False)
+        total = wc[&#39;count&#39;].sum()
+
+        wc[&#39;pct_total&#39;] = wc[&#39;count&#39;].apply(lambda x: x / total)
+
+        wc = wc.sort_values(by=&#39;rank&#39;)
+        wc[&#39;cul_pct_total&#39;] = wc[&#39;pct_total&#39;].cumsum()
+
+        t2 = zip(appears_in.keys(), appears_in.values())
+        ac = pd.DataFrame(t2, columns=[&#39;word&#39;, &#39;appears_in&#39;])
+        wc = ac.merge(wc, on=&#39;word&#39;)
+
+        wc[&#39;appears_in_pct&#39;] = wc[&#39;appears_in&#39;].apply(lambda x: x / total_docs)
+
+        return wc.sort_values(by=&#39;rank&#39;)
+
+    @staticmethod
+    def squarify_this(df):
+        &#34;&#34;&#34;
+        Import a dataframe, outputs a visualiztion.
+        :param df:
+        :return:
+        &#34;&#34;&#34;
+        return squarify.plot(sizes=df[&#34;pct_total&#34;], label=df[&#34;cul_pct_total&#34;], alpha=.8 )</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="main.HandleTokens.count"><code class="name flex">
+<span>def <span class="ident">count</span></span>(<span>docs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function. import a dataframe, to count the words as an output.
+:param docs:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def count(docs):
+    &#34;&#34;&#34;
+    Function. import a dataframe, to count the words as an output.
+    :param docs:
+    :return:
+    &#34;&#34;&#34;
+    word_counts = Counter()
+    appears_in = Counter()
+
+    total_docs = len(docs)
+
+    for doc in docs:
+        word_counts.update(doc)
+        appears_in.update(set(doc))
+
+    temp = zip(word_counts.keys(), word_counts.values())
+
+    wc = pd.DataFrame(temp, columns=[&#39;word&#39;, &#39;count&#39;])
+
+    wc[&#39;rank&#39;] = wc[&#39;count&#39;].rank(method=&#39;first&#39;, ascending=False)
+    total = wc[&#39;count&#39;].sum()
+
+    wc[&#39;pct_total&#39;] = wc[&#39;count&#39;].apply(lambda x: x / total)
+
+    wc = wc.sort_values(by=&#39;rank&#39;)
+    wc[&#39;cul_pct_total&#39;] = wc[&#39;pct_total&#39;].cumsum()
+
+    t2 = zip(appears_in.keys(), appears_in.values())
+    ac = pd.DataFrame(t2, columns=[&#39;word&#39;, &#39;appears_in&#39;])
+    wc = ac.merge(wc, on=&#39;word&#39;)
+
+    wc[&#39;appears_in_pct&#39;] = wc[&#39;appears_in&#39;].apply(lambda x: x / total_docs)
+
+    return wc.sort_values(by=&#39;rank&#39;)</code></pre>
+</details>
+</dd>
+<dt id="main.HandleTokens.squarify_this"><code class="name flex">
+<span>def <span class="ident">squarify_this</span></span>(<span>df)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Import a dataframe, outputs a visualiztion.
+:param df:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def squarify_this(df):
+    &#34;&#34;&#34;
+    Import a dataframe, outputs a visualiztion.
+    :param df:
+    :return:
+    &#34;&#34;&#34;
+    return squarify.plot(sizes=df[&#34;pct_total&#34;], label=df[&#34;cul_pct_total&#34;], alpha=.8 )</code></pre>
+</details>
+</dd>
+<dt id="main.HandleTokens.tokenize"><code class="name flex">
+<span>def <span class="ident">tokenize</span></span>(<span>df_in)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function, df_in input, to output a tokenized list.
+:param df_in:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def tokenize(df_in):
+    &#34;&#34;&#34;
+    Function, df_in input, to output a tokenized list.
+    :param df_in:
+    :return:
+    &#34;&#34;&#34;
+    nlp = spacy.load(&#34;en_core_web_lg&#34;)
+    tokenizer = Tokenizer(nlp.vocab)
+    tokens = []
+    for doc in tokenizer.pipe(df_in, batch_size=500):
+        doc_tokens = [token.text for token in doc]
+        tokens.append(doc_tokens)
+    return tokens</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="main.SpacyFruitfulFunctions"><code class="flex name class">
+<span>class <span class="ident">SpacyFruitfulFunctions</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SpacyFruitfulFunctions(object):
+
+    @staticmethod
+    def stem_this(list_in):
+        &#34;&#34;&#34;
+        stemming removes last few letters of a words
+        :param list_in:
+        :return:
+        &#34;&#34;&#34;
+        ps = PorterStemmer()
+        state = []
+        for word in list_in:
+            state.append(ps.stem(word))
+        return state</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="main.SpacyFruitfulFunctions.stem_this"><code class="name flex">
+<span>def <span class="ident">stem_this</span></span>(<span>list_in)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>stemming removes last few letters of a words
+:param list_in:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def stem_this(list_in):
+    &#34;&#34;&#34;
+    stemming removes last few letters of a words
+    :param list_in:
+    :return:
+    &#34;&#34;&#34;
+    ps = PorterStemmer()
+    state = []
+    for word in list_in:
+        state.append(ps.stem(word))
+    return state</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="main.State"><code class="flex name class">
+<span>class <span class="ident">State</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class State(object):
+    def __init__(self):
+        self._test = 100
+
+    @property
+    def test(self):
+        &#34;&#34;&#34;
+        Function to report the state _test
+        :return: test
+        &#34;&#34;&#34;
+        print(self._test)
+        return self._test
+
+    @test.setter
+    def test(self, value):
+        &#34;&#34;&#34;
+        Inputs value into function to be saved into state _test
+        :param value:
+        :return:
+        &#34;&#34;&#34;
+        print(value)
+        self._test = value</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="main.State.test"><code class="name">var <span class="ident">test</span></code></dt>
+<dd>
+<div class="desc"><p>Function to report the state _test
+:return: test</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def test(self):
+    &#34;&#34;&#34;
+    Function to report the state _test
+    :return: test
+    &#34;&#34;&#34;
+    print(self._test)
+    return self._test</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="main.StopWords"><code class="flex name class">
+<span>class <span class="ident">StopWords</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class StopWords(object):
+    @staticmethod
+    def stap():
+        return &#39;t&#39;</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="main.StopWords.stap"><code class="name flex">
+<span>def <span class="ident">stap</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def stap():
+    return &#39;t&#39;</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="main.Visualize"><code class="flex name class">
+<span>class <span class="ident">Visualize</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Visualize(object):
+
+    @staticmethod
+    def distribution_plot(df_in):
+        &#34;&#34;&#34;
+
+        :param df_in:
+        :return:
+        &#34;&#34;&#34;
+        return sns.lineplot(x=&#39;rank&#39;, y=&#39;cul_pct_total&#39;, data=df_in)
+
+    @staticmethod
+    def square_plot(wc):
+        &#34;&#34;&#34;
+
+        :param wc:
+        :return:
+        &#34;&#34;&#34;
+        wc_top20 = wc[wc[&#39;rank&#39;] &lt;= 20]
+
+        squarify.plot(sizes=wc_top20[&#39;pct_total&#39;], label=wc_top20[&#39;word&#39;], alpha=.8)
+        plt.axis(&#39;off&#39;)
+        return plt.show()
+
+    @staticmethod
+    def trimming(wc):
+        return sns.lineplot(x=&#39;rank&#39;, y=&#39;cul_pct_total&#39;, data=wc);</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="main.Visualize.distribution_plot"><code class="name flex">
+<span>def <span class="ident">distribution_plot</span></span>(<span>df_in)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param df_in:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def distribution_plot(df_in):
+    &#34;&#34;&#34;
+
+    :param df_in:
+    :return:
+    &#34;&#34;&#34;
+    return sns.lineplot(x=&#39;rank&#39;, y=&#39;cul_pct_total&#39;, data=df_in)</code></pre>
+</details>
+</dd>
+<dt id="main.Visualize.square_plot"><code class="name flex">
+<span>def <span class="ident">square_plot</span></span>(<span>wc)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param wc:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def square_plot(wc):
+    &#34;&#34;&#34;
+
+    :param wc:
+    :return:
+    &#34;&#34;&#34;
+    wc_top20 = wc[wc[&#39;rank&#39;] &lt;= 20]
+
+    squarify.plot(sizes=wc_top20[&#39;pct_total&#39;], label=wc_top20[&#39;word&#39;], alpha=.8)
+    plt.axis(&#39;off&#39;)
+    return plt.show()</code></pre>
+</details>
+</dd>
+<dt id="main.Visualize.trimming"><code class="name flex">
+<span>def <span class="ident">trimming</span></span>(<span>wc)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def trimming(wc):
+    return sns.lineplot(x=&#39;rank&#39;, y=&#39;cul_pct_total&#39;, data=wc);</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="main.FruitfulFunctions" href="#main.FruitfulFunctions">FruitfulFunctions</a></code></h4>
+<ul class="two-column">
+<li><code><a title="main.FruitfulFunctions.count_pipeline" href="#main.FruitfulFunctions.count_pipeline">count_pipeline</a></code></li>
+<li><code><a title="main.FruitfulFunctions.count_tokens" href="#main.FruitfulFunctions.count_tokens">count_tokens</a></code></li>
+<li><code><a title="main.FruitfulFunctions.df_alphanumeric" href="#main.FruitfulFunctions.df_alphanumeric">df_alphanumeric</a></code></li>
+<li><code><a title="main.FruitfulFunctions.df_counts" href="#main.FruitfulFunctions.df_counts">df_counts</a></code></li>
+<li><code><a title="main.FruitfulFunctions.df_lower" href="#main.FruitfulFunctions.df_lower">df_lower</a></code></li>
+<li><code><a title="main.FruitfulFunctions.df_raw_count" href="#main.FruitfulFunctions.df_raw_count">df_raw_count</a></code></li>
+<li><code><a title="main.FruitfulFunctions.df_split" href="#main.FruitfulFunctions.df_split">df_split</a></code></li>
+<li><code><a title="main.FruitfulFunctions.df_token" href="#main.FruitfulFunctions.df_token">df_token</a></code></li>
+<li><code><a title="main.FruitfulFunctions.df_upper" href="#main.FruitfulFunctions.df_upper">df_upper</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="main.HandleTokens" href="#main.HandleTokens">HandleTokens</a></code></h4>
+<ul class="">
+<li><code><a title="main.HandleTokens.count" href="#main.HandleTokens.count">count</a></code></li>
+<li><code><a title="main.HandleTokens.squarify_this" href="#main.HandleTokens.squarify_this">squarify_this</a></code></li>
+<li><code><a title="main.HandleTokens.tokenize" href="#main.HandleTokens.tokenize">tokenize</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="main.SpacyFruitfulFunctions" href="#main.SpacyFruitfulFunctions">SpacyFruitfulFunctions</a></code></h4>
+<ul class="">
+<li><code><a title="main.SpacyFruitfulFunctions.stem_this" href="#main.SpacyFruitfulFunctions.stem_this">stem_this</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="main.State" href="#main.State">State</a></code></h4>
+<ul class="">
+<li><code><a title="main.State.test" href="#main.State.test">test</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="main.StopWords" href="#main.StopWords">StopWords</a></code></h4>
+<ul class="">
+<li><code><a title="main.StopWords.stap" href="#main.StopWords.stap">stap</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="main.Visualize" href="#main.Visualize">Visualize</a></code></h4>
+<ul class="">
+<li><code><a title="main.Visualize.distribution_plot" href="#main.Visualize.distribution_plot">distribution_plot</a></code></li>
+<li><code><a title="main.Visualize.square_plot" href="#main.Visualize.square_plot">square_plot</a></code></li>
+<li><code><a title="main.Visualize.trimming" href="#main.Visualize.trimming">trimming</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>
